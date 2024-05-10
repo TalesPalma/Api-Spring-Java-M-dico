@@ -2,9 +2,9 @@ package tales.palma.api.jpa;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import tales.palma.api.model.DTOUpdateMedico;
 import tales.palma.api.model.ESPECIALIDADE;
 import tales.palma.api.model.EnderecoDTO;
 import tales.palma.api.model.MedicoDTO;
@@ -15,16 +15,16 @@ import tales.palma.api.model.MedicoDTO;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
 public class Medico {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String nome;
     private String email;
     private String crm;
-
+    public String telefone;
     @Enumerated(EnumType.STRING)
     private ESPECIALIDADE especialidade;
 
@@ -37,6 +37,18 @@ public class Medico {
         this.crm = medico.crm();
         this.especialidade = medico.especialidade();
         this.endereco = medico.endereco();
+        this.telefone = medico.telefone();
     }
 
+    public void updateInfos(DTOUpdateMedico medico) {
+        if (medico.edendereco() != null) {
+            this.endereco = medico.edendereco();
+        } else if (medico.telefone() != null) {
+            this.telefone = medico.telefone();
+        } else if(medico.email() != null) {
+            this.email = medico.email();
+        }else{
+            System.out.println("Nada a ser att");
+        }
+    }
 }
