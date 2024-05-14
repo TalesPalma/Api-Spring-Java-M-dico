@@ -4,10 +4,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import tales.palma.api.model.DTOUpdateMedico;
-import tales.palma.api.model.ESPECIALIDADE;
+import tales.palma.api.model.medico.DTOUpdateMedico;
+import tales.palma.api.model.medico.ESPECIALIDADE;
 import tales.palma.api.model.EnderecoDTO;
-import tales.palma.api.model.MedicoDTO;
+import tales.palma.api.model.medico.MedicoDTO;
 
 
 @Table(name = "medicos")

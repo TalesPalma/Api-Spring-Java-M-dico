@@ -1,4 +1,4 @@
-package tales.palma.api.model;
+package tales.palma.api.model.medico;
 
 public enum ESPECIALIDADE {
     CARDIOLOGIA,

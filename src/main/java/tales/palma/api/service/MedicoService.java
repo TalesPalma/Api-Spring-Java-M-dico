@@ -5,9 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import tales.palma.api.jpa.Medico;
-import tales.palma.api.model.DTOUpdateMedico;
-import tales.palma.api.model.MedicoDTO;
-import tales.palma.api.model.MedicoRepository;
+import tales.palma.api.model.medico.DTOUpdateMedico;
+import tales.palma.api.model.medico.MedicoDTO;
+import tales.palma.api.model.medico.MedicoRepository;
 
 @Service
 public class MedicoService {

@@ -7,12 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import tales.palma.api.model.DTOUpdateMedico;
-import tales.palma.api.model.MedicoDTO;
+import tales.palma.api.model.medico.DTOUpdateMedico;
+import tales.palma.api.model.medico.MedicoDTO;
 import tales.palma.api.service.MedicoService;
-
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 
 @RestController
 @RequestMapping("medico")
