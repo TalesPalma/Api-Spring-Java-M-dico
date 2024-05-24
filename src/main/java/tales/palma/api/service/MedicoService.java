@@ -26,14 +26,14 @@ public class MedicoService {
 
 
     public ResponseEntity<MedicoDTO> registerMedico(MedicoDTO medico, UriComponentsBuilder uriBuilder) {
-        if (repository.existsByEmail(medico.email())) {
-            throw new RuntimeException("Email ja existente");
-        } else {
             var newMedico = new Medico(medico);
-            repository.save(newMedico);
+            try{
+                repository.save(newMedico);
+            }catch (Exception e){
+                throw new RuntimeException(e);
+            }
             var uri = uriBuilder.path("/medico/{id}").buildAndExpand(newMedico.getId()).toUri();
             return ResponseEntity.created(uri).body(medico);
-        }
     }
 
     public ResponseEntity<MedicoDTO> getById(Long id) {
