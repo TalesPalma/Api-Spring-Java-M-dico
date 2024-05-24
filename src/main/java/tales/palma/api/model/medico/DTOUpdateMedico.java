@@ -7,6 +7,7 @@ import tales.palma.api.model.EnderecoDTO;
 public record DTOUpdateMedico(
         @NotNull Long id,
         String telefone,
+        String nome,
         EnderecoDTO edendereco,
         String email
 ) {

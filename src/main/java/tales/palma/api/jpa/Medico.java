@@ -40,15 +40,19 @@ public class Medico {
         this.telefone = medico.telefone();
     }
 
-    public void updateInfos(DTOUpdateMedico medico) {
-        if (medico.edendereco() != null) {
+    public MedicoDTO updateInfos(DTOUpdateMedico medico) {
+       if (medico.edendereco() != null) {
             this.endereco = medico.edendereco();
         } else if (medico.telefone() != null) {
             this.telefone = medico.telefone();
-        } else if(medico.email() != null) {
+        } else if (medico.email() != null) {
             this.email = medico.email();
-        }else{
+        } else if (medico.nome() != null){
+            this.nome = medico.nome();
+        }
+        else {
             System.out.println("Nada a ser att");
         }
+        return new MedicoDTO(this);
     }
 }

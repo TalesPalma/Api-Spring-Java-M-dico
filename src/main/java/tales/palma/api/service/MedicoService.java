@@ -1,9 +1,12 @@
 package tales.palma.api.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 import tales.palma.api.jpa.Medico;
 import tales.palma.api.model.medico.DTOUpdateMedico;
 import tales.palma.api.model.medico.MedicoDTO;
@@ -16,31 +19,42 @@ public class MedicoService {
     private MedicoRepository repository;
 
 
-    public Page<MedicoDTO> getAll(Pageable pageable) {
-        return repository.findAll(pageable).map(MedicoDTO::new);
+    public ResponseEntity<Page<MedicoDTO>> getAll(Pageable pageable) {
+        Page<MedicoDTO> medicoPage = repository.findAll(pageable).map(MedicoDTO::new);
+        return ResponseEntity.ok(medicoPage);
     }
 
 
-    public void registerMedico(MedicoDTO medico) {
+    public ResponseEntity<MedicoDTO> registerMedico(MedicoDTO medico, UriComponentsBuilder uriBuilder) {
         if (repository.existsByEmail(medico.email())) {
             throw new RuntimeException("Email ja existente");
-        }else{
-            repository.save(new Medico(medico));
+        } else {
+            var newMedico = new Medico(medico);
+            repository.save(newMedico);
+            var uri = uriBuilder.path("/medico/{id}").buildAndExpand(newMedico.getId()).toUri();
+            return ResponseEntity.created(uri).body(medico);
         }
     }
 
-    public MedicoDTO getById(Long id) {
-        return repository.findById(id).map(MedicoDTO::new).orElse(null);
+    public ResponseEntity<MedicoDTO> getById(Long id) {
+        MedicoDTO medico = repository.findById(id).map(MedicoDTO::new).orElse(null);
+        if (medico == null) {
+            throw new EntityNotFoundException("Medico não encontrado");
+        }
+        return ResponseEntity.ok(medico);
     }
 
 
-    public void update(DTOUpdateMedico medicoUpdate) {
+    public ResponseEntity<MedicoDTO> update(DTOUpdateMedico medicoUpdate) {
         var medico = repository.getReferenceById(medicoUpdate.id());
-        medico.updateInfos(medicoUpdate);
+        MedicoDTO medicoAtt = medico.updateInfos(medicoUpdate);
+        return ResponseEntity.ok(medicoAtt);
     }
 
 
-    public void delete(Long id) {
+    public ResponseEntity<Void> delete(Long id) {
         repository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
+
 }
