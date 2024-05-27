@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tales.palma.api.jpa.Paciente;
 import tales.palma.api.model.paciente.PacienteDTO;
-import tales.palma.api.model.paciente.PacienteRepository;
+import tales.palma.api.jpa.PacienteRepository;
 
 import java.util.List;
 

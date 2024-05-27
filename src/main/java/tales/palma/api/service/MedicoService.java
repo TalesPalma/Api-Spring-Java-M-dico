@@ -10,7 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import tales.palma.api.jpa.Medico;
 import tales.palma.api.model.medico.DTOUpdateMedico;
 import tales.palma.api.model.medico.MedicoDTO;
-import tales.palma.api.model.medico.MedicoRepository;
+import tales.palma.api.jpa.MedicoRepository;
 
 @Service
 public class MedicoService {
