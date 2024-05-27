@@ -1,9 +1,21 @@
 package tales.palma.api.service;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import tales.palma.api.jpa.UserRepository;
 
 @Service
-public class AutheticationService {
+public class AutheticationService implements UserDetailsService {
+    @Autowired
+    private UserRepository repository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return repository.findByUsername(username);
+    }
 
 }

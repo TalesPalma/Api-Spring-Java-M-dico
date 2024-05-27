@@ -1,4 +1,4 @@
-package tales.palma.api.infra;
+package tales.palma.api.infra.erros;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
